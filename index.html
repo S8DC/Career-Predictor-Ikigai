@@ -6,6 +6,7 @@
 <title>Ikigai Career Predictor</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --cream:#F6F1E7;--washi:#EDE6D8;--ink:#1C1914;--stone:#7A7268;
@@ -191,13 +192,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;background:var(--ink)
 .niche-tag{display:inline-block;font-size:10px;letter-spacing:.1em;padding:2px 8px;background:var(--persimmon-l);color:var(--persimmon);text-transform:uppercase;margin-left:8px;vertical-align:middle}
 .career-score{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;text-align:center;display:flex;flex-direction:column;align-items:center}
 .career-score span{font-size:14px;color:var(--stone);display:block;font-family:'Zen Kaku Gothic New',sans-serif}
-.career-axes{padding:1.5rem 2rem;display:none;background:var(--cream);border-bottom:0.5px solid var(--border)}
+.career-axes{padding:1.5rem 2rem;display:block;background:var(--cream);border-bottom:0.5px solid var(--border)}
 .career-card.expanded .career-axes{display:block;animation:slideFadeIn 0.4s ease}
 .career-desc{font-size:13px;color:var(--stone);margin-bottom:1.25rem;line-height:1.7}
 .axis-row{display:flex;align-items:center;gap:1rem;margin-bottom:10px}
 .axis-label{font-size:12px;letter-spacing:.06em;color:var(--stone);width:120px;flex-shrink:0;display:flex;align-items:center;gap:6px}
 .axis-bar-wrap{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.axis-bar{height:100%;transition:width 1.2s cubic-bezier(0.16,1,0.3,1);width:0%}
+.axis-bar{height:100%;transform-origin:left;animation:slideRightBar 1.2s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes slideRightBar { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
 .axis-pct{font-size:13px;width:40px;text-align:right;flex-shrink:0}
 .career-expand-btn{width:100%;background:transparent;border:none;padding:12px;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--stone);transition:all 0.3s}
 .career-expand-btn:hover{background:rgba(28,25,20,0.03);color:var(--ink)}
@@ -300,6 +302,267 @@ body.dark .salary-val{color:var(--persimmon)}
 .profile-opts{display:flex;flex-direction:column;gap:8px}
 .profile-opts .opt{padding:.75rem 1rem}
 .ability-block{display:flex;flex-direction:column;gap:1.5rem}
+
+.career-card:nth-child(1) { animation-delay: 0s; }
+.career-card:nth-child(2) { animation-delay: 0.15s; }
+.career-card:nth-child(3) { animation-delay: 0.3s; }
+.career-card:nth-child(4) { animation-delay: 0.45s; }
+.career-card:nth-child(5) { animation-delay: 0.6s; }
+.career-card:nth-child(6) { animation-delay: 0.75s; }
+
+/* ══════════════════════════════════════════════
+   MOBILE RESPONSIVE — Full overhaul
+   Desktop (>768px): completely untouched
+   Tablet (≤768px): adapted layouts
+   Phone (≤480px): fully optimised
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* NAV */
+  nav { padding: 0 1.25rem; height: 56px; }
+  .nav-logo { font-size: 18px; letter-spacing: .04em; }
+  .nav-links { gap: 1.25rem; }
+  .nav-links a { font-size: 12px; letter-spacing: .06em; }
+  .server-pill { display: none; } /* hide on mobile — space saver */
+
+  /* HERO */
+  .hero { grid-template-columns: 1fr; padding-top: 56px; min-height: auto; }
+  .hero-left { padding: 3rem 1.5rem 2rem; order: 1; }
+  .hero-right { padding: 2rem 1.5rem; justify-content: center; order: 2; }
+  .hero-title { font-size: clamp(36px, 8vw, 52px); }
+  .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 1.5rem; }
+  .btn { padding: 12px 24px; font-size: 12px; letter-spacing: .1em; }
+  .btn-s { margin-left: .5rem; }
+
+  /* IKIGAI VENN DIAGRAM */
+  .ikigai-diagram { width: 260px; height: 260px; }
+  .ikc { width: 155px; height: 155px; }
+  .clabel { font-size: 10px; letter-spacing: .08em; }
+  .cl-good { left: -56px; }
+  .cl-need { right: -56px; }
+  .cl-love { top: -24px; }
+  .cl-paid { bottom: -24px; }
+
+  /* STEPS SECTION */
+  .steps-section { padding: 3rem 1.5rem; }
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .card-step-num { font-size: 36px; }
+  .step-title { font-size: 13px; }
+  .step-desc { font-size: 12px; }
+
+  /* QUIZ HEADER */
+  .quiz-header { padding: 2rem 1.5rem 1.25rem; }
+  .quiz-header h1 { font-size: 26px; font-weight: 300; }
+  .quiz-meta { flex-direction: column; gap: .5rem; align-items: flex-start; }
+  .q-counter { font-size: 12px; }
+  .progress-wrap { gap: 4px; margin-top: 1rem; }
+  .pseg { height: 2px; }
+
+  /* QUIZ BODY */
+  .quiz-body { padding: 2rem 1.5rem; }
+  .circle-badge { font-size: 11px; padding: 6px 12px; margin-bottom: 1.5rem; }
+
+  /* QUESTIONS */
+  .q-label { font-size: 11px; letter-spacing: .12em; }
+  .q-text { font-size: 20px; margin-bottom: .4rem; }
+  .q-hint { font-size: 13px; margin-bottom: 1.25rem; }
+  .question-block { margin-bottom: 2rem; }
+
+  /* OPTIONS — single column on tablet */
+  .options-grid { grid-template-columns: 1fr; gap: 8px; }
+  .opt { padding: 1rem 1.25rem; min-height: 52px; align-items: center; }
+  .opt-num { font-size: 16px; min-width: 18px; }
+  .opt-text { font-size: 13px; line-height: 1.5; }
+
+  /* SLIDERS */
+  .sliders-wrap { gap: 1.25rem; }
+  .slider-row { grid-template-columns: 1fr; gap: .5rem; }
+  .slider-trait { font-size: 13px; color: var(--ink); font-weight: 400; }
+  .slider-val { text-align: left; font-size: 20px; }
+  .slider-ends { font-size: 10px; }
+  input[type=range] { height: 4px; }
+  input[type=range]::-webkit-slider-thumb { width: 20px; height: 20px; }
+
+  /* ABOUT SLIDERS (Section 5) */
+  .about-sliders { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+  .about-slider-card { padding: 1.25rem; }
+  .asc-val { font-size: 26px; margin-bottom: .5rem; }
+  .asc-q { font-size: 16px; }
+  .asc-ends { font-size: 10px; }
+
+  /* QUIZ NAV BUTTONS — full width stacked */
+  .quiz-nav { flex-direction: column-reverse; gap: .75rem; margin-top: 2rem; padding-top: 1.5rem; }
+  .quiz-nav .btn-p, .quiz-nav .btn-s { width: 100%; text-align: center; margin-left: 0; display: block; }
+
+  /* SECTION DIVIDER */
+  .section-divider { margin: 1.75rem 0; }
+
+  /* RESULTS */
+  .results-header { padding: 2rem 1.5rem 1.5rem; }
+  .results-header h1 { font-size: 26px; }
+  .results-header p { font-size: 13px; }
+  .results-body { padding: 1.5rem; }
+  .java-badge { font-size: 10px; padding: 4px 10px; margin-bottom: 1rem; }
+
+  /* CAREER CARD */
+  .career-card { margin-bottom: 1.25rem; }
+  .career-card-header { flex-wrap: wrap; gap: .75rem; padding: 1.25rem; }
+  .career-rank { font-size: 28px; margin-right: .5rem; }
+  .career-info { flex: 1; min-width: 0; }
+  .career-name { font-size: 18px; line-height: 1.3; }
+  .niche-tag { font-size: 9px; padding: 1px 6px; }
+  .career-score { font-size: 36px; line-height: 1; text-align: right; flex-shrink: 0; }
+  .career-score span { font-size: 12px; }
+
+  /* AXIS BARS */
+  .career-axes { padding: 1.25rem; }
+  .career-desc { font-size: 13px; margin-bottom: 1rem; }
+  .axis-row { gap: .75rem; margin-bottom: 8px; }
+  .axis-label { width: 80px; font-size: 11px; }
+  .axis-pct { font-size: 12px; width: 36px; }
+
+  /* ROADMAP — single column stacked */
+  .roadmap-section { padding: 1.25rem; }
+  .roadmap-header { flex-direction: column; gap: .5rem; align-items: flex-start; }
+  .roadmap-title { font-size: 13px; }
+  .roadmap-timeline { font-size: 11px; }
+  .roadmap-meta { grid-template-columns: 1fr; gap: .75rem; margin-bottom: 1rem; }
+  .rm-label { font-size: 10px; }
+  .rm-value { font-size: 13px; }
+  .roadmap-salary { flex-direction: column; gap: .75rem; margin-bottom: 1rem; }
+  .salary-arrow { transform: rotate(90deg); text-align: center; }
+  .salary-val { font-size: 18px; }
+  .salary-label { font-size: 10px; }
+  .roadmap-steps-title { font-size: 10px; margin-bottom: .5rem; }
+  .roadmap-step { gap: 10px; margin-bottom: 2px; }
+  .step-num { min-width: 22px; height: 22px; font-size: 10px; }
+  .step-text { font-size: 12px; line-height: 1.55; }
+
+  /* GAP BOX */
+  .gap-box { padding: 1.25rem; flex-direction: column; gap: 1rem; }
+  .gap-title { font-size: 11px; }
+  .gap-text { font-size: 13px; }
+
+  /* RETAKE */
+  .retake-wrap { margin-top: 2rem; padding-top: 1.5rem; }
+  .retake-wrap .btn-s, .retake-wrap .btn-p { display: block; width: 100%; text-align: center; margin-left: 0; margin-bottom: .75rem; }
+
+  /* ABOUT PAGE */
+  .about-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; gap: 2rem; }
+  .about-hero h1 { font-size: 36px; }
+  .about-hero p { font-size: 14px; }
+  .kanji { font-size: 80px; }
+  .four-circles { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 1rem; }
+  .cc { padding: 1.25rem; }
+  .cc-title { font-size: 18px; }
+  .about-careers { padding: 0 1.5rem 3rem; }
+  .about-careers h2 { font-size: 22px; margin-bottom: 1.25rem; }
+  .about-careers .btn-p { width: 100%; text-align: center; display: block; }
+
+  /* TABLE — horizontal scroll */
+  .about-careers { overflow-x: hidden; }
+  .ctable-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 0.5px solid var(--border); }
+  .ctable { min-width: 520px; font-size: 13px; }
+  .ctable th, .ctable td { padding: 10px 12px; }
+
+  /* LOADING */
+  .loading-wrap { padding: 3rem 1.5rem; }
+  .loading-kanji { font-size: 56px; }
+  .loading-text { font-size: 18px; }
+  .loading-sub { font-size: 12px; }
+
+  /* DARK TOGGLE */
+  .dark-toggle { bottom: 1.25rem; right: 1.25rem; width: 44px; height: 44px; font-size: 18px; }
+
+  /* FOOTER */
+  .footer { font-size: 11px; padding: 1.5rem 1.25rem; line-height: 1.8; }
+}
+
+/* ── PHONE (≤480px) — tightest layout ────────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* NAV */
+  nav { padding: 0 1rem; }
+  .nav-logo { font-size: 15px; }
+  .nav-links { gap: .875rem; }
+  .nav-links a { font-size: 11px; letter-spacing: 0; }
+
+  /* HERO */
+  .hero-left { padding: 2.5rem 1.25rem 1.5rem; }
+  .hero-right { display: none; } /* hide venn on very small phones */
+  .hero-title { font-size: clamp(30px, 9vw, 42px); }
+  .hero-sub { font-size: 13px; }
+  .btn { padding: 11px 18px; font-size: 11px; }
+  .btn-s { margin-left: .375rem; }
+
+  /* STEPS */
+  .steps-section { padding: 2.5rem 1.25rem; }
+  .steps-grid { grid-template-columns: 1fr; gap: .875rem; }
+  .step-card { padding: 1.25rem; }
+  .card-step-num { font-size: 32px; }
+  .step-title { font-size: 13px; }
+  .step-desc { font-size: 12px; }
+
+  /* QUIZ */
+  .quiz-header { padding: 1.5rem 1.25rem 1rem; }
+  .quiz-header h1 { font-size: 21px; }
+  .quiz-body { padding: 1.5rem 1.25rem; }
+  .circle-badge { font-size: 10px; padding: 5px 10px; }
+  .q-text { font-size: 18px; }
+  .q-label { font-size: 10px; }
+  .q-hint { font-size: 12px; }
+
+  /* OPTIONS */
+  .opt { padding: .875rem 1rem; }
+  .opt-num { font-size: 14px; min-width: 16px; }
+  .opt-text { font-size: 12px; }
+
+  /* SLIDERS */
+  .slider-trait { font-size: 12px; }
+  .slider-val { font-size: 18px; }
+
+  /* RESULTS */
+  .results-header { padding: 1.5rem 1.25rem 1rem; }
+  .results-header h1 { font-size: 22px; }
+  .results-body { padding: 1rem 1.25rem; }
+  .career-card-header { padding: 1rem; }
+  .career-rank { font-size: 24px; }
+  .career-name { font-size: 16px; }
+  .career-score { font-size: 30px; }
+  .career-axes { padding: 1rem; }
+  .career-desc { font-size: 12px; }
+  .axis-label { width: 70px; font-size: 10px; }
+  .axis-pct { font-size: 11px; width: 32px; }
+
+  /* ROADMAP */
+  .roadmap-section { padding: 1rem; }
+  .rm-value { font-size: 12px; line-height: 1.5; }
+  .step-text { font-size: 11px; }
+  .step-num { min-width: 20px; height: 20px; font-size: 10px; }
+  .salary-val { font-size: 16px; }
+
+  /* ABOUT */
+  .about-hero { padding: 2rem 1.25rem 1.5rem; }
+  .about-hero h1 { font-size: 28px; }
+  .kanji { font-size: 64px; }
+  .about-careers { padding: 0 1.25rem 2rem; }
+  .four-circles { padding: 1.5rem 1.25rem; gap: .875rem; }
+  .cc { padding: 1.25rem; }
+
+  /* JAVA BADGE */
+  .java-badge { font-size: 10px; padding: 4px 10px; }
+
+  /* NICHE TAG */
+  .niche-tag { font-size: 9px; padding: 1px 6px; }
+
+  /* DARK TOGGLE */
+  .dark-toggle { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 16px; }
+
+  /* FOOTER */
+  .footer { font-size: 10px; padding: 1.25rem 1rem; }
+}
+
 </style>
 </head>
 <body>
@@ -332,7 +595,7 @@ body.dark .salary-val{color:var(--persimmon)}
         <button class="btn btn-p" onclick="showPage('quiz')">Begin Assessment</button>
         <button class="btn btn-s" onclick="showPage('about')">What is Ikigai?</button>
       </div>
-      <div class="server-pill" style="margin-top:.5rem"><span class="sdot" id="sdot2"></span><span id="stxt2">Java server · https://career-predictor-ikigai-1.onrender.com</span></div>
+      <div class="server-pill" style="margin-top:.5rem"><span class="sdot" id="sdot2"></span><span id="stxt2">Render backend connected</span></div>
     </div>
     <div class="hero-right">
       <div class="ikigai-diagram">
@@ -439,6 +702,7 @@ body.dark .salary-val{color:var(--persimmon)}
   </div>
   <div class="about-careers">
     <h2>51 careers across 8 clusters in the Java database</h2>
+    <div class="ctable-wrap">
     <table class="ctable">
       <thead><tr><th>Career</th><th>Niche</th><th>Ideal Work Style</th><th>Risk Level</th><th>Academic Fit</th></tr></thead>
       <tbody>
@@ -459,6 +723,7 @@ body.dark .salary-val{color:var(--persimmon)}
         <tr><td>Environmental Journalist</td><td>Yes</td><td>Mixed</td><td>Moderate-high</td><td>Arts, Any</td></tr>
       </tbody>
     </table>
+    </div>
     <br/>
     <button class="btn btn-p" onclick="showPage('quiz')">Take the Assessment</button>
   </div>
@@ -540,7 +805,7 @@ async function loadQuestions() {
       <div style="padding:3rem 5rem">
         <div style="border:0.5px solid var(--persimmon-l);background:var(--persimmon-l);padding:2rem">
           <div style="font-size:14px;color:var(--persimmon);margin-bottom:.5rem">Could not load questions from Java</div>
-          <div style="font-size:13px;color:var(--stone)">Make sure your Java server is running at https://career-predictor-ikigai-1.onrender.com</div>
+          <div style="font-size:13px;color:var(--stone)">Make sure your Render backend is running at career-predictor-ikigai-1.onrender.com</div>
           <div style="font-family:monospace;font-size:12px;margin-top:1rem;background:var(--washi);padding:1rem">
             cd ~/Downloads/IkigaiPredictor<br/>
             javac -d out src/com/ikigai/*.java<br/>
@@ -947,8 +1212,8 @@ function renderResults(data) {
     ).join('');
 
     html += `
-    <div class="career-card" style="animation-delay:${i * 0.15}s" id="career-${i}">
-      <div class="career-card-header" onclick="toggleCareer(${i})" style="cursor:pointer" title="Click to expand">
+    <div class="career-card">
+      <div class="career-card-header">
         <span class="career-rank ${i===0?'gold':''}">${medals[i]}</span>
         <div class="career-info">
           <div class="career-name">${c.name}${c.isNiche ? '<span class="niche-tag">Niche</span>' : ''}</div>
@@ -957,16 +1222,15 @@ function renderResults(data) {
             <span style="font-size:12px;color:var(--stone);letter-spacing:.06em">IKIGAI MATCH · 5-AXIS</span>
           </div>
         </div>
-        <div class="career-score" data-score="${c.matchPercent}">0<span>% match</span></div>
+        <div class="career-score">${c.matchPercent}<span>% match</span></div>
       </div>
-      <button class="career-expand-btn" onclick="toggleCareer(${i})">Why this fits you ↓</button>
       <div class="career-axes">
         <div class="career-desc">${c.description}</div>
         ${['love','good','need','paid','compatibility'].map(ax => {
           const lbs = {love:'❤  Love', good:'✦  Good At', need:'◎  Needs', paid:'◈  Paid For', compatibility:'◉  Compat.'};
           return `<div class="axis-row">
             <span class="axis-label">${lbs[ax]}</span>
-            <div class="axis-bar-wrap"><div class="axis-bar" data-width="${c.axes[ax]}%" style="width:0%;background:${axColors[ax]}"></div></div>
+            <div class="axis-bar-wrap"><div class="axis-bar" style="width:${c.axes[ax]}%;background:${axColors[ax]}"></div></div>
             <span class="axis-pct">${c.axes[ax]}%</span>
           </div>`;
         }).join('')}
@@ -1028,7 +1292,7 @@ function renderError(err, payload) {
   document.getElementById('results-body').innerHTML = `
   <div class="err-box">
     <div class="err-title">Java Server Not Reachable</div>
-    <div class="err-text">Tried <strong>https://career-predictor-ikigai-1.onrender.com/predict</strong> — couldn't connect. Start the Java server first.</div>
+    <div class="err-text">Tried <strong>career-predictor-ikigai-1.onrender.com/predict</strong> — couldn't connect. Start the Java server first.</div>
     <div class="err-code">
       1. cd IkigaiPredictor/<br/>
       2. javac -d out src/com/ikigai/*.java<br/>
@@ -1065,6 +1329,9 @@ function showPage(name) {
   window.scrollTo(0, 0);
 }
 
+// Load questions on startup
+loadQuestions();
+
 // ── AMBIENT ANIMATIONS & MICROINTERACTIONS ─────────────────────────────────
 
 // Ripple effect on buttons
@@ -1082,60 +1349,6 @@ document.addEventListener('click', function(e) {
     setTimeout(() => ripple.remove(), 600);
   }
 });
-
-// Career Card Expansion
-window.toggleCareer = function(idx) {
-  const card = document.getElementById('career-' + idx);
-  if (!card) return;
-  card.classList.toggle('expanded');
-  const btn = card.querySelector('.career-expand-btn');
-  if (card.classList.contains('expanded')) {
-    btn.innerHTML = 'Hide details ↑';
-  } else {
-    btn.innerHTML = 'Why this fits you ↓';
-  }
-};
-
-// Result Animations Content
-window.animateResults = function() {
-  document.querySelectorAll('.career-card').forEach((card, idx) => {
-    const scoreEl = card.querySelector('.career-score');
-    if (scoreEl) {
-      const target = parseInt(scoreEl.getAttribute('data-score')) || 0;
-      let curr = 0;
-      const step = Math.max(1, Math.ceil(target / 40));
-      const intv = setInterval(() => {
-        curr += step;
-        if (curr >= target) { curr = target; clearInterval(intv); }
-        scoreEl.innerHTML = `${curr}<span>% match</span>`;
-      }, 30);
-    }
-    setTimeout(() => {
-      card.querySelectorAll('.axis-bar').forEach(bar => {
-        bar.style.width = bar.getAttribute('data-width');
-      });
-    }, (idx * 150) + 300);
-  });
-};
-
-// Hook animation into renderResults
-const origRenderResults = renderResults;
-renderResults = function(data) {
-  origRenderResults(data);
-  setTimeout(window.animateResults, 100);
-};
-
-// Hook transition reset into goSec
-const origGoSec = goSec;
-goSec = function(n) {
-  origGoSec(n);
-  const qblocks = document.querySelectorAll('#qs-' + n + ' .question-block');
-  qblocks.forEach(qb => {
-    qb.style.animation = 'none';
-    void qb.offsetWidth;
-    qb.style.animation = null; 
-  });
-};
 
 // Ambient Canvas setup
 function initAmbient() {
@@ -1194,6 +1407,7 @@ setTimeout(initAmbient, 100);
 
 // Load questions on startup
 loadQuestions();
+
 </script>
 </body>
 </html>
